@@ -5,15 +5,15 @@ The settings file is not included in the repo to keep the key safe.
 settings.txt goes in the Plugins folder and should look like this...
 
 
-[FCC]
-key = API KEY FOR DISCORD HERE
+[FCC]<br>
+key = API KEY FOR DISCORD HERE<br><br>
 
-[Authorized_Roles]
-role1 = Member
-role2 = None
-role3 = None
-role4 = None
+[Authorized_Roles]<br>
+role1 = Member<br>
+role2 = None<br>
+role3 = None<br>
+role4 = None<br><br>
 
-[Admin_Role]
+[Admin_Role]<br>
 adminrole = Admins
 
