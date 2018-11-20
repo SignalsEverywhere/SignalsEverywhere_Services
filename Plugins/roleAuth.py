@@ -13,6 +13,15 @@ def currentPath():
         path = cwd + '/Plugins'
         return path
 
+def adminRole(author):
+    config.read(currentPath() + '/settings.txt')
+    adminRole = config.get('Admin_Role', 'adminrole')
+    for role in author:
+        print('Admin Detected :' + str(role))
+        if str(role) == adminRole:
+            return True
+        else:
+            pass
 
 def checkRole(author):
     config.read(currentPath() + '/settings.txt')

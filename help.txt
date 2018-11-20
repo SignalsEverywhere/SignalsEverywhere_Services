@@ -1,0 +1,10 @@
+Hello, my name is Grant.
+
+I provide services here on SignalsEverywhere.
+Below you will find a list of things I can do for you
+
+```?commands
+This is the current command, you can follow this up with the name of another command to get more details```
+
+*This is a test to a change to the help file without restarting grant.
+**Eventually make it possible to edit this file as an admin**

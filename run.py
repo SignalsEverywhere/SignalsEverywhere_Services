@@ -8,7 +8,7 @@ from Plugins import fccid
 client = discord.Client()
 
 def serverRole(author_id):
-    roles = client.get_server("499221835225890826").get_member(author_id).roles
+    roles = client.get_server("514278702218084353").get_member(author_id).roles ##This should be the server ID of which you are running these services
     return roles
 
 
@@ -20,7 +20,6 @@ async def on_ready():
     print('------')
     await client.change_presence(game=discord.Game(name='FCC Lookup / !help'))
 
-help_msg = '!id fccid_here'
 
 @client.event
 async def on_message(message):
@@ -31,6 +30,8 @@ async def on_message(message):
 
     if message.content.startswith('?help'):
         #await client.purge_from(message.channel, limit=1, check=message.author)
+        help_file = open("help.txt", "r")
+        help_msg = help_file.read()
         privateMessage = await client.start_private_message(message.author)
         await client.send_message(privateMessage, help_msg)
 
@@ -83,12 +84,12 @@ async def on_message(message):
 
 
     if message.content.startswith('?getroles'):
-        if roleAuth.checkRole(serverRole(message.author.id)):
+        if roleAuth.adminRole(serverRole(message.author.id)):
             privateMessage = await client.start_private_message(message.author)
             await client.send_message(privateMessage, botConf.grabAuthroles())
 
     if message.content.startswith('?updateroles'):
-        if roleAuth.checkRole(serverRole(message.author.id)):
+        if roleAuth.adminRole(serverRole(message.author.id)):
             privateMessage = await client.start_private_message(message.author)
             msg = message.content
             split = msg.split(' ', 4)
