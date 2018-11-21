@@ -7,8 +7,8 @@ from Plugins import fccid
 
 client = discord.Client()
 
-def serverRole(author_id):
-    roles = client.get_server("514278702218084353").get_member(author_id).roles ##This should be the server ID of which you are running these services
+def serverRole(author_id, server_id):
+    roles = client.get_server(server_id).get_member(author_id).roles ##This should be the server ID of which you are running these services
     return roles
 
 
@@ -18,7 +18,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await client.change_presence(game=discord.Game(name='FCC Lookup / !help'))
+    await client.change_presence(game=discord.Game(name='?help'))
 
 
 @client.event
@@ -32,7 +32,7 @@ async def on_message(message):
         await client.send_message(privateMessage, help_msg)
 
     if message.content.startswith('!id'):
-        if roleAuth.checkRole(serverRole(message.author.id)):
+        if roleAuth.checkRole(serverRole(message.author.id, message.server.id)):
             await client.send_typing(message.channel)
             try:
                 msg = message.content
@@ -59,12 +59,12 @@ async def on_message(message):
 
 
     if message.content.startswith('?getroles'):
-        if roleAuth.adminRole(serverRole(message.author.id)):
+        if roleAuth.adminRole(serverRole(message.author.id, message.server.id)):
             privateMessage = await client.start_private_message(message.author)
             await client.send_message(privateMessage, botConf.grabAuthroles())
 
     if message.content.startswith('?updateroles'):
-        if roleAuth.adminRole(serverRole(message.author.id)):
+        if roleAuth.adminRole(serverRole(message.author.id, message.server.id)):
             privateMessage = await client.start_private_message(message.author)
             msg = message.content
             split = msg.split(' ', 4)
@@ -95,5 +95,5 @@ async def on_message(message):
 
 
 
-client.run(botConf.grabKey())
-#client.run(botConf.devKey())
+#client.run(botConf.grabKey())
+client.run(botConf.devKey())
