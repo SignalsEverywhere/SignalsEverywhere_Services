@@ -21,7 +21,7 @@ def grab_general(fccid):
     return send_back
 
 def start(fccid):
-    page = requests.get("https://fccid.io/%s" % fccid)
+    page = requests.get("http://fccid.io/%s" % fccid)
     #print(page.content)
     soup = BeautifulSoup(page.content, "lxml")
 
@@ -36,7 +36,7 @@ def start(fccid):
     #print(soup)
 
 def manu(fccid):
-    page = requests.get("https://fccid.io/%s" % fccid)
+    page = requests.get("http://fccid.io/%s" % fccid)
     soup = BeautifulSoup(page.content, "lxml")
     title = soup.findAll("title")
     data = re.findall("<title>FCC ID " + fccid + ".(.*?)</title>", str(title))
@@ -44,7 +44,7 @@ def manu(fccid):
 
 
 def freq(fccid):
-    page = requests.get("https://fccid.io/%s" % fccid)
+    page = requests.get("http://fccid.io/%s" % fccid)
     soup = BeautifulSoup(page.content, "lxml")
     freqs = soup.findAll("div", {"class": "panel panel-primary"})
     #printme = re.findall("lower=(.*?)</a></td><td>",str(freqs))
@@ -61,7 +61,7 @@ def freq(fccid):
 
 
 def power(fccid):
-    page = requests.get("https://fccid.io/%s" % fccid)
+    page = requests.get("http://fccid.io/%s" % fccid)
     soup = BeautifulSoup(page.content, "lxml")
     try:
         power = soup.findAll("div", {"class": "panel panel-primary"})
@@ -78,7 +78,7 @@ def power(fccid):
 
 
 def internal(fccid):
-    page = requests.get("https://fccid.io/%s" % fccid)
+    page = requests.get("http://fccid.io/%s" % fccid)
     soup = BeautifulSoup(page.content, "lxml")
     grabclass = soup.findAll("div", {"class": "tab-pane fade active in"})
     graburl = re.findall("href.*?Internal Photo", str(grabclass))
@@ -93,7 +93,7 @@ def internal(fccid):
         return(' ')
 
 def diagram(fccid):
-    page = requests.get("https://fccid.io/%s" % fccid)
+    page = requests.get("http://fccid.io/%s" % fccid)
     soup = BeautifulSoup(page.content, "lxml")
     grabclass = soup.findAll("div", {"class": "tab-pane fade active in"})
     graburl = re.findall("href.*?Block Diagram", str(grabclass))
@@ -105,7 +105,7 @@ def diagram(fccid):
         return (' ')
 
 def schematics(fccid):
-    page = requests.get("https://fccid.io/%s" % fccid)
+    page = requests.get("http://fccid.io/%s" % fccid)
     soup = BeautifulSoup(page.content, "lxml")
     grabclass = soup.findAll("div", {"class": "tab-pane fade active in"})
     graburl = re.findall("href.*?Schematics<", str(grabclass))
@@ -118,7 +118,7 @@ def schematics(fccid):
         return (' ')
 
 def part(fccid):
-    page = requests.get("https://fccid.io/%s" % fccid)
+    page = requests.get("http://fccid.io/%s" % fccid)
     soup = BeautifulSoup(page.content, "lxml")
     try:
         power = soup.findAll("div", {"class": "panel panel-primary"})
@@ -130,6 +130,19 @@ def part(fccid):
         return('Part: ' + str(stripped[0]))
     except:
         return('')
+
+def isValid(fccid):     #Checks to see if an ID is valid based on scraped output from the fccid website
+    page = requests.get("http://fccid.io/%s" % fccid)
+    soup = BeautifulSoup(page.content, "lxml")
+    search = soup.findAll("div", {"class": "jumbotron"})
+    strip = re.findall("May Not Be Valid", str(search))
+    try:
+        if strip[0] == "May Not Be Valid":
+            return(False)
+    except:
+        return(True)
+
+#print(isValid('EW780-5735-02'))
 
 #part('R6TRFM308RD')
 #power('GB8SD-700A')

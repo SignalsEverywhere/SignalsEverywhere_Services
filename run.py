@@ -37,18 +37,21 @@ async def on_message(message):
             try:
                 msg = message.content
                 split = msg.split(' ')
-                id = split[1].upper()  ###upper works but now never throws an error, need to check page for error message
-                url1 = ('https://fccid.io/%s\\' % id)
-                url2 = ('https://gov.fccid.io/%s\\' % id)
-                title = fccid.manu(id)
-                freq = fccid.freq(id)
-                photos = fccid.internal(id)
-                power = fccid.power(id)
-                diagram = fccid.diagram(id)
-                schematics = fccid.schematics(id)
-                part = fccid.part(id)
-                assembled = "```" + title + "\r\n" + freq + "\r\n" + power + "  " + part + "```" + "\r\n" + 'Details: ' + url1 + ' or ' + url2 + '\r\n' + photos + '\r\n' + diagram + '\r\n' + schematics
-                await client.send_message(message.channel, assembled)
+                id = split[1].upper()
+                if fccid.isValid(id) == True: ##check to see if the fcc id is valid
+                    url1 = ('https://fccid.io/%s\\' % id)
+                    url2 = ('https://gov.fccid.io/%s\\' % id)
+                    title = fccid.manu(id)
+                    freq = fccid.freq(id)
+                    photos = fccid.internal(id)
+                    power = fccid.power(id)
+                    diagram = fccid.diagram(id)
+                    schematics = fccid.schematics(id)
+                    part = fccid.part(id)
+                    assembled = "```" + title + "\r\n" + freq + "\r\n" + power + "  " + part + "```" + "\r\n" + 'Details: ' + url1 + ' or ' + url2 + '\r\n' + photos + '\r\n' + diagram + '\r\n' + schematics
+                    await client.send_message(message.channel, assembled)
+                else:
+                    await client.send_message(message.channel, "Sorry that ID does not appear to be valid")
             except:
                 await client.send_message(message.channel,
                                           'Sorry, the website syntax must be weird on this one.\rTake your pick of links instead.\n\r\n' + 'FCCID: ' + url1 + '\r\n' + 'FCC.GOV: ' + url2)
@@ -95,5 +98,5 @@ async def on_message(message):
 
 
 
-#client.run(botConf.grabKey())
-client.run(botConf.devKey())
+client.run(botConf.grabKey())
+#client.run(botConf.devKey())
