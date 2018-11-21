@@ -18,12 +18,13 @@ def cwd():
 
 def grabKey():
     config.read(currentPath() + '/settings.txt')
-    key = config.get('FCC', 'key')
+    key = config.get('GRANT_CONF', 'key')
     return key
 
 def devKey():
     config.read(currentPath() + '/settings.txt')
-    devkey = config.get('FCC', 'key')
+    devkey = config.get('GRANT_CONF', 'devkey')
+    print("WARNING: RUNNING WITH DEV KEY")
     return devkey
 
 def authorizedRoles():
