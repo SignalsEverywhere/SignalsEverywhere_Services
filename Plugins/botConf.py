@@ -21,6 +21,11 @@ def grabKey():
     key = config.get('FCC', 'key')
     return key
 
+def devKey():
+    config.read(currentPath() + '/settings.txt')
+    devkey = config.get('FCC', 'key')
+    return devkey
+
 def authorizedRoles():
     currentRoles = grabAuthroles()
 

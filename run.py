@@ -23,10 +23,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    ##!private creates a new private message and then sends some text over.
-    if message.content.startswith('?private'):
-        privateMessage = await client.start_private_message(message.author)
-        await client.send_message(privateMessage, 'test')
 
     if message.content.startswith('?help'):
         #await client.purge_from(message.channel, limit=1, check=message.author)
@@ -35,14 +31,13 @@ async def on_message(message):
         privateMessage = await client.start_private_message(message.author)
         await client.send_message(privateMessage, help_msg)
 
-
     if message.content.startswith('!id'):
         if roleAuth.checkRole(serverRole(message.author.id)):
             await client.send_typing(message.channel)
             try:
                 msg = message.content
                 split = msg.split(' ')
-                id = split[1]
+                id = split[1].upper()  ###upper works but now never throws an error, need to check page for error message
                 url1 = ('https://fccid.io/%s\\' % id)
                 url2 = ('https://gov.fccid.io/%s\\' % id)
                 title = fccid.manu(id)
@@ -58,29 +53,9 @@ async def on_message(message):
                 await client.send_message(message.channel,
                                           'Sorry, the website syntax must be weird on this one.\rTake your pick of links instead.\n\r\n' + 'FCCID: ' + url1 + '\r\n' + 'FCC.GOV: ' + url2)
                 print("Debug " + assembled)
-
-    if message.content.startswith('!debug'):
-        if roleAuth.checkRole(serverRole(message.author.id)):
-            await client.send_typing(message.channel)
-            msg = message.content
-            split = msg.split(' ')
-            id = split[1].upper()
-            url1 = ('https://fccid.io/%s\\' % id)
-            url2 = ('https://gov.fccid.io/%s\\' % id)
-            title = fccid.manu(id)
-            freq = fccid.freq(id)
-            photos = fccid.internal(id)
-            power = fccid.power(id)
-            diagram = fccid.diagram(id)
-            schematics = fccid.schematics(id)
-            part = fccid.part(id)
-            assembled = "```" + title + "\r\n" + freq + "\r\n" + power + "  " + part + "```" + "\r\n" + 'Details: ' + url1 + ' or ' + url2 + '\r\n' + photos + '\r\n' + diagram + '\r\n' + schematics
-            await client.send_message(message.channel, assembled)
-
-
-    if message.content.startswith('?test'):
-        if roleAuth.checkRole(serverRole(message.author.id)):
-            await client.send_message(message.channel, 'Authorized')
+        else:
+            privateMessage = await client.start_private_message(message.author)
+            await client.send_message(privateMessage, 'Sorry You don\'t have the botaccess role')
 
 
     if message.content.startswith('?getroles'):
@@ -120,5 +95,5 @@ async def on_message(message):
 
 
 
-
 client.run(botConf.grabKey())
+#client.run(botConf.devKey())

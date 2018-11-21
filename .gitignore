@@ -101,3 +101,4 @@ ENV/
 .mypy_cache/
 
 /Plugins/settings.txt
+.run.py.swp
