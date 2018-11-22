@@ -1,6 +1,4 @@
 import discord
-import asyncio
-import re
 from Plugins import roleAuth
 from Plugins import botConf
 from Plugins import fccid
@@ -8,7 +6,7 @@ from Plugins import fccid
 client = discord.Client()
 
 def serverRole(author_id, server_id):
-    roles = client.get_server(server_id).get_member(author_id).roles ##This should be the server ID of which you are running these services
+    roles = client.get_server(server_id).get_member(author_id).roles
     return roles
 
 
@@ -60,14 +58,17 @@ async def on_message(message):
             privateMessage = await client.start_private_message(message.author)
             await client.send_message(privateMessage, 'Sorry You don\'t have the botaccess role')
 
+    if message.content.startswith('?myid'):
+        print(message.author.id)
+
 
     if message.content.startswith('?getroles'):
-        if roleAuth.adminRole(serverRole(message.author.id, message.server.id)):
+        if roleAuth.adminRole(message.author.id):
             privateMessage = await client.start_private_message(message.author)
             await client.send_message(privateMessage, botConf.grabAuthroles())
 
     if message.content.startswith('?updateroles'):
-        if roleAuth.adminRole(serverRole(message.author.id, message.server.id)):
+        if roleAuth.adminRole(message.author.id):
             privateMessage = await client.start_private_message(message.author)
             msg = message.content
             split = msg.split(' ', 4)
@@ -98,5 +99,5 @@ async def on_message(message):
 
 
 
-client.run(botConf.grabKey())
-#client.run(botConf.devKey())
+#client.run(botConf.grabKey())
+client.run(botConf.devKey())

@@ -15,13 +15,12 @@ def currentPath():
 
 def adminRole(author):
     config.read(currentPath() + '/settings.txt')
-    adminRole = config.get('Admin_Role', 'adminrole')
-    for role in author:
-        print('Admin Detected :' + str(role))
-        if str(role) == adminRole:
-            return True
-        else:
-            pass
+    user_id = config.get('Admin_ID', 'user')
+    if user_id == author:
+        print('Admin User Detected: ' + user_id)
+        return True
+    else:
+        pass
 
 def checkRole(author):
     config.read(currentPath() + '/settings.txt')
@@ -29,7 +28,6 @@ def checkRole(author):
     role2 = config.get('Authorized_Roles', 'role2')
     role3 = config.get('Authorized_Roles', 'role3')
     role4 = config.get('Authorized_Roles', 'role4')
-    adminRole = config.get('Admin_Role', 'adminrole')
     for role in author:
         print('Debug: ' + str(role))
         if str(role) == role1:
@@ -39,8 +37,6 @@ def checkRole(author):
         if str(role) == role3:
             return True
         if str(role) == role4:
-            return True
-        if str(role) == adminRole:
             return True
         else:
             pass
