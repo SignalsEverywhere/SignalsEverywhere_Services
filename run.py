@@ -3,6 +3,7 @@ import requests
 from Plugins import roleAuth
 from Plugins import botConf
 from Plugins import fccid
+from Plugins import hamCall
 
 client = discord.Client()
 
@@ -29,6 +30,15 @@ async def on_message(message):
         help_msg = help_file.read()
         privateMessage = await client.start_private_message(message.author)
         await client.send_message(privateMessage, help_msg)
+
+    if message.content.startswith('!call'):
+        if roleAuth.checkRole(serverRole(message.author.id, message.server.id)):
+            await client.send_typing(message.channel)
+            msg = message.content
+            split = msg.split(' ')
+            print(hamCall.callsign_start(split[1]))
+            await client.send_message(message.channel, hamCall.callsign_start(split[1]))
+
 
     if message.content.startswith('!id'):
         if roleAuth.checkRole(serverRole(message.author.id, message.server.id)):
@@ -101,5 +111,5 @@ async def on_message(message):
 
 
 
-client.run(botConf.grabKey())
-#client.run(botConf.devKey())
+#client.run(botConf.grabKey())
+client.run(botConf.devKey())
