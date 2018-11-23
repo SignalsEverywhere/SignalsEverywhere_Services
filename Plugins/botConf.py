@@ -15,6 +15,17 @@ def currentPath():
 def cwd():
     return os.getcwd()
 
+def grabHelp():
+    config.read(currentPath() + '/settings.txt')
+    helpText = config.get('HELP', 'message')
+    return helpText
+
+def updateHelp(help_msg):
+    config.read(currentPath() + '/settings.txt')
+    config.set('HELP', 'message', str(help_msg))
+    with open('Plugins/settings.txt', 'w') as configfile:
+        config.write(configfile)
+
 
 def grabKey():
     config.read(currentPath() + '/settings.txt')

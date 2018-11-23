@@ -1,5 +1,6 @@
 import discord
 import requests
+import re
 from Plugins import roleAuth
 from Plugins import botConf
 from Plugins import fccid
@@ -18,7 +19,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await client.change_presence(game=discord.Game(name='?help'))
+    await client.change_presence(game=discord.Game(name='!helpme'))
 
 
 @client.event
@@ -26,10 +27,24 @@ async def on_message(message):
 
     if message.content.startswith('?help'):
         #await client.purge_from(message.channel, limit=1, check=message.author)
-        help_file = open("help.txt", "r")
-        help_msg = help_file.read()
+        #help_file = open("help.txt", "r")
+        #help_msg = help_file.read()
+        help_msg = botConf.grabHelp()
         privateMessage = await client.start_private_message(message.author)
         await client.send_message(privateMessage, help_msg)
+
+    if message.content.startswith('?updatehelp'):
+        if roleAuth.adminRole(message.author.id):
+            privateMessage = await client.start_private_message(message.author)
+            msg = message.content
+            stripped = re.sub('\?updatehelp', '', msg)
+            await client.send_typing(message.channel)
+            await client.send_message(privateMessage, "Thanks, here is a preview of your help file\r\n\r\n" + stripped + '\r\n\r\n\r\n')
+            await client.send_message(privateMessage, 'Type \'confirmed\' to save.')
+            if await client.wait_for_message(author=message.author, content='confirmed'):
+                botConf.updateHelp(stripped)
+                await client.send_typing(message.channel)
+                await client.send_message(privateMessage, 'updated')
 
     if message.content.startswith('!call'):
         if roleAuth.checkRole(serverRole(message.author.id, message.server.id)):
@@ -111,5 +126,5 @@ async def on_message(message):
 
 
 
-#client.run(botConf.grabKey())
-client.run(botConf.devKey())
+client.run(botConf.grabKey())
+#client.run(botConf.devKey())
