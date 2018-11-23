@@ -30,13 +30,13 @@ def checkRole(author):
     role4 = config.get('Authorized_Roles', 'role4')
     for role in author:
         print('Debug: ' + str(role))
-        if str(role) == role1:
+        if str(role).lower() == role1.lower():
             return True
-        if str(role) == role2:
+        if str(role).lower() == role2.lower():
             return True
-        if str(role) == role3:
+        if str(role).lower() == role3.lower():
             return True
-        if str(role) == role4:
+        if str(role).lower() == role4.lower():
             return True
         else:
             pass

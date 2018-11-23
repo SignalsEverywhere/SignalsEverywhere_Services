@@ -33,10 +33,10 @@ def authorizedRoles():
 
 def grabAuthroles():
     config.read(currentPath() + '/settings.txt')
-    role1 = config.get('Authorized_Roles', 'role1')
-    role2 = config.get('Authorized_Roles', 'role2')
-    role3 = config.get('Authorized_Roles', 'role3')
-    role4 = config.get('Authorized_Roles', 'role4')
+    role1 = config.get('Authorized_Roles', 'role1').lower()
+    role2 = config.get('Authorized_Roles', 'role2').lower()
+    role3 = config.get('Authorized_Roles', 'role3').lower()
+    role4 = config.get('Authorized_Roles', 'role4').lower()
     currentRoles = 'Role1: ' + role1 + '\r\nRole2: ' + role2 + '\r\nRole3 ' + role3 + '\r\nRole4 ' + role4
     return currentRoles
 
