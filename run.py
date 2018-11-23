@@ -72,7 +72,7 @@ async def on_message(message):
     if message.content.startswith('?updateroles'):
         if roleAuth.adminRole(message.author.id):
             privateMessage = await client.start_private_message(message.author)
-            msg = message.content
+            msg = message.content.lower()
             split = msg.split(' ', 4)
             try:
                 role1 = split[1]
@@ -101,5 +101,5 @@ async def on_message(message):
 
 
 
-#client.run(botConf.grabKey())
-client.run(botConf.devKey())
+client.run(botConf.grabKey())
+#client.run(botConf.devKey())
