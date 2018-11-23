@@ -102,3 +102,6 @@ ENV/
 
 /Plugins/settings.txt
 .run.py.swp
+.idea
+/.idea
+

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="81bf7585-8938-44e8-b7cf-e9353069aa34" name="Default Changelist" comment="Updated config settings so that roles are case insensitive. This was done by making the checks look at everything in lowercase regardless of the input.">
-      <change afterPath="$PROJECT_DIR$/Plugins/hamCall.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+    <list default="true" id="81bf7585-8938-44e8-b7cf-e9353069aa34" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.run.py.swp" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,14 +45,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="26" />
-          <entry key="py" value="4445" />
-          <entry key="txt" value="2106" />
+          <entry key="py" value="4458" />
+          <entry key="txt" value="2193" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="2132" />
-          <entry key="Python" value="4445" />
+          <entry key="PLAIN_TEXT" value="2219" />
+          <entry key="Python" value="4458" />
         </counts>
       </usages-collector>
     </session>
@@ -64,7 +62,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
+            <state relative-caret-position="171">
               <caret line="38" column="48" selection-start-line="38" selection-start-column="48" selection-end-line="38" selection-end-column="48" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
@@ -73,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Plugins/hamCall.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+            <state relative-caret-position="467">
+              <caret line="60" column="245" selection-start-line="60" selection-start-column="245" selection-end-line="60" selection-end-column="245" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -121,11 +119,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1768">
-              <caret line="104" selection-start-line="104" selection-end-line="104" />
+            <state relative-caret-position="405">
+              <caret line="102" column="21" lean-forward="true" selection-start-line="102" selection-start-column="21" selection-end-line="102" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -162,6 +160,7 @@
       <find>debug:</find>
       <find>debug:</find>
       <find>update</find>
+      <find>content.decode('utf-8')</find>
       <find>updateroles</find>
     </findStrings>
     <replaceStrings>
@@ -380,19 +379,26 @@
       <option name="project" value="LOCAL" />
       <updated>1542940438665</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Amateur callsign look up added using old bot code from another repo of mine.">
+      <created>1542942270807</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1542942270807</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14974293" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14974293" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49807197" visible="true" weight="0.23521505" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49807197" visible="true" weight="0.23521505" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -452,20 +458,14 @@
     <MESSAGE value="Master admin set via user ID. This allows DM to the bot outside of a given server so you can administratively issue commands to the bot without having to do so publically and without requiring the server ID to get roles for authentication." />
     <MESSAGE value="Removed reduntant calling of requests to prevent each call from pulling the web page 6 or more times. This improves load time and lessens the load on the server. It is however very dirty code and not my final fix." />
     <MESSAGE value="Updated config settings so that roles are case insensitive. This was done by making the checks look at everything in lowercase regardless of the input." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated config settings so that roles are case insensitive. This was done by making the checks look at everything in lowercase regardless of the input." />
+    <MESSAGE value="Amateur callsign look up added using old bot code from another repo of mine." />
+    <option name="LAST_COMMIT_MESSAGE" value="Amateur callsign look up added using old bot code from another repo of mine." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitattributes">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
-          <caret line="104" selection-start-line="104" selection-end-line="104" />
         </state>
       </provider>
     </entry>
@@ -513,9 +513,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Plugins/hamCall.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="60" column="245" selection-start-line="60" selection-start-column="245" selection-end-line="60" selection-end-column="245" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
+        <state relative-caret-position="171">
           <caret line="38" column="48" selection-start-line="38" selection-start-column="48" selection-end-line="38" selection-end-column="48" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
@@ -523,13 +533,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Plugins/hamCall.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="405">
+          <caret line="102" column="21" lean-forward="true" selection-start-line="102" selection-start-column="21" selection-end-line="102" selection-end-column="21" />
         </state>
       </provider>
     </entry>
