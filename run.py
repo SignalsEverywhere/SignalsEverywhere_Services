@@ -1,4 +1,5 @@
 import discord
+import requests
 from Plugins import roleAuth
 from Plugins import botConf
 from Plugins import fccid
@@ -36,16 +37,17 @@ async def on_message(message):
                 msg = message.content
                 split = msg.split(' ')
                 id = split[1].upper()
-                if fccid.isValid(id) == True: ##check to see if the fcc id is valid
+                pageRequest = requests.get("http://fccid.io/%s" % id)
+                if fccid.isValid(pageRequest) == True: ##check to see if the fcc id is valid
                     url1 = ('https://fccid.io/%s\\' % id)
                     url2 = ('https://gov.fccid.io/%s\\' % id)
-                    title = fccid.manu(id)
-                    freq = fccid.freq(id)
-                    photos = fccid.internal(id)
-                    power = fccid.power(id)
-                    diagram = fccid.diagram(id)
-                    schematics = fccid.schematics(id)
-                    part = fccid.part(id)
+                    title = fccid.manu(pageRequest, id)
+                    freq = fccid.freq(pageRequest)
+                    photos = fccid.internal(pageRequest)
+                    power = fccid.power(pageRequest)
+                    diagram = fccid.diagram(pageRequest)
+                    schematics = fccid.schematics(pageRequest)
+                    part = fccid.part(pageRequest)
                     assembled = "```" + title + "\r\n" + freq + "\r\n" + power + "  " + part + "```" + "\r\n" + 'Details: ' + url1 + ' or ' + url2 + '\r\n' + photos + '\r\n' + diagram + '\r\n' + schematics
                     await client.send_message(message.channel, assembled)
                 else:

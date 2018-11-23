@@ -4,29 +4,29 @@ import requests
 
 
 #Function to input code from bot and return the response
-def grab_general(fccid):
-    fccID = fccid
-    url = ('http://fccid.io/%s' % fccID)
-    fcc_query = requests.get(url)
-    content = fcc_query.text
+#def grab_general(fccid):
+#    fccID = fccid
+#    url = ('http://fccid.io/%s' % fccID)
+#    fcc_query = requests.get(url)
+#    content = fcc_query.text
+#
+#    rel = '<h1>FCC ID 2ADUIESP-12</h1>(.*?)</h4>'
+#    rg = re.compile(rel, re.IGNORECASE | re.DOTALL)
+#    m = rg.search(content.decode('utf-8'))
+#    if m:
+#        general_data = m.group(1)
+#        print("FCC Holder: (" + general_data + ")" + "\n")
+#
+#    send_back = general_data
+#    return send_back
 
-    rel = '<h1>FCC ID 2ADUIESP-12</h1>(.*?)</h4>'
-    rg = re.compile(rel, re.IGNORECASE | re.DOTALL)
-    m = rg.search(content.decode('utf-8'))
-    if m:
-        general_data = m.group(1)
-        print("FCC Holder: (" + general_data + ")" + "\n")
-
-    send_back = general_data
-    return send_back
-
-def start(fccid):
-    page = requests.get("http://fccid.io/%s" % fccid)
+def start(pageRequest, id):
+    #page = requests.get("http://fccid.io/%s" % fccid)
     #print(page.content)
-    soup = BeautifulSoup(page.content, "lxml")
+    soup = BeautifulSoup(pageRequest.content, "lxml")
 
     title = soup.findAll("title")
-    dev = re.findall("<title>FCC ID " + fccid + ".(.*?)</title>", str(title))
+    dev = re.findall("<title>FCC ID " + id + ".(.*?)</title>", str(title))
 
 
     freqs = soup.findAll("div", { "class" : "panel panel-primary" })
@@ -35,17 +35,17 @@ def start(fccid):
     #soup = soup.select('<h4>')
     #print(soup)
 
-def manu(fccid):
-    page = requests.get("http://fccid.io/%s" % fccid)
-    soup = BeautifulSoup(page.content, "lxml")
+def manu(pageRequest, id):
+    #page = requests.get("http://fccid.io/%s" % fccid)
+    soup = BeautifulSoup(pageRequest.content, "lxml")
     title = soup.findAll("title")
-    data = re.findall("<title>FCC ID " + fccid + ".(.*?)</title>", str(title))
+    data = re.findall("<title>FCC ID " + id + ".(.*?)</title>", str(title))
     return(data[0])
 
 
-def freq(fccid):
-    page = requests.get("http://fccid.io/%s" % fccid)
-    soup = BeautifulSoup(page.content, "lxml")
+def freq(pageRequest):
+    #page = requests.get("http://fccid.io/%s" % fccid)
+    soup = BeautifulSoup(pageRequest.content, "lxml")
     freqs = soup.findAll("div", {"class": "panel panel-primary"})
     #printme = re.findall("lower=(.*?)</a></td><td>",str(freqs))
     try:
@@ -60,9 +60,9 @@ def freq(fccid):
 
 
 
-def power(fccid):
-    page = requests.get("http://fccid.io/%s" % fccid)
-    soup = BeautifulSoup(page.content, "lxml")
+def power(pageRequest):
+    #page = requests.get("http://fccid.io/%s" % fccid)
+    soup = BeautifulSoup(pageRequest.content, "lxml")
     try:
         power = soup.findAll("div", {"class": "panel panel-primary"})
         radiostring = re.findall("Hz(.*?)_blank", str(power))
@@ -77,9 +77,9 @@ def power(fccid):
 
 
 
-def internal(fccid):
-    page = requests.get("http://fccid.io/%s" % fccid)
-    soup = BeautifulSoup(page.content, "lxml")
+def internal(pageRequest):
+    #page = requests.get("http://fccid.io/%s" % fccid)
+    soup = BeautifulSoup(pageRequest.content, "lxml")
     grabclass = soup.findAll("div", {"class": "tab-pane fade active in"})
     graburl = re.findall("href.*?Internal Photo", str(grabclass))
     try:
@@ -92,9 +92,9 @@ def internal(fccid):
     except:
         return(' ')
 
-def diagram(fccid):
-    page = requests.get("http://fccid.io/%s" % fccid)
-    soup = BeautifulSoup(page.content, "lxml")
+def diagram(pageRequest):
+    #page = requests.get("http://fccid.io/%s" % fccid)
+    soup = BeautifulSoup(pageRequest.content, "lxml")
     grabclass = soup.findAll("div", {"class": "tab-pane fade active in"})
     graburl = re.findall("href.*?Block Diagram", str(grabclass))
     try:
@@ -104,9 +104,9 @@ def diagram(fccid):
     except:
         return (' ')
 
-def schematics(fccid):
-    page = requests.get("http://fccid.io/%s" % fccid)
-    soup = BeautifulSoup(page.content, "lxml")
+def schematics(pageRequest):
+    #page = requests.get("http://fccid.io/%s" % fccid)
+    soup = BeautifulSoup(pageRequest.content, "lxml")
     grabclass = soup.findAll("div", {"class": "tab-pane fade active in"})
     graburl = re.findall("href.*?Schematics<", str(grabclass))
     try:
@@ -117,9 +117,9 @@ def schematics(fccid):
     except:
         return (' ')
 
-def part(fccid):
-    page = requests.get("http://fccid.io/%s" % fccid)
-    soup = BeautifulSoup(page.content, "lxml")
+def part(pageRequest):
+    #page = requests.get("http://fccid.io/%s" % fccid)
+    soup = BeautifulSoup(pageRequest.content, "lxml")
     try:
         power = soup.findAll("div", {"class": "panel panel-primary"})
         radiostring = re.findall("ecfr.io/Title(.*?)</", str(power))
@@ -131,9 +131,9 @@ def part(fccid):
     except:
         return('')
 
-def isValid(fccid):     #Checks to see if an ID is valid based on scraped output from the fccid website
-    page = requests.get("http://fccid.io/%s" % fccid)
-    soup = BeautifulSoup(page.content, "lxml")
+def isValid(pageRequest):     #Checks to see if an ID is valid based on scraped output from the fccid website
+    #page = requests.get("http://fccid.io/%s" % fccid)
+    soup = BeautifulSoup(pageRequest.content, "lxml")
     search = soup.findAll("div", {"class": "jumbotron"})
     strip = re.findall("May Not Be Valid", str(search))
     try:
