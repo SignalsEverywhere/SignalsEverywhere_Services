@@ -8,10 +8,6 @@ from Plugins import hamCall
 
 client = discord.Client()
 
-def serverRole(author_id, server_id):
-    roles = client.get_server(server_id).get_member(author_id).roles
-    return roles
-
 
 @client.event
 async def on_ready():
@@ -19,12 +15,11 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await client.change_presence(game=discord.Game(name='!helpme'))
+    await client.change_presence(game=discord.Game(name='?help'))
 
 
 @client.event
 async def on_message(message):
-
     if message.content.startswith('?help'):
         #await client.purge_from(message.channel, limit=1, check=message.author)
         #help_file = open("help.txt", "r")
@@ -46,17 +41,17 @@ async def on_message(message):
                 await client.send_typing(message.channel)
                 await client.send_message(privateMessage, 'updated')
 
-    if message.content.startswith('!call'):
-        if roleAuth.checkRole(serverRole(message.author.id, message.server.id)):
-            await client.send_typing(message.channel)
-            msg = message.content
-            split = msg.split(' ')
-            print(hamCall.callsign_start(split[1]))
-            await client.send_message(message.channel, hamCall.callsign_start(split[1]))
+#    if message.content.startswith('!call'):
+#        if roleAuth.checkRole(client, message):
+#            await client.send_typing(message.channel)
+#            msg = message.content
+#            split = msg.split(' ')
+#            print(hamCall.callsign_start(split[1]))
+#            await client.send_message(message.channel, hamCall.callsign_start(split[1]))
 
 
     if message.content.startswith('!id'):
-        if roleAuth.checkRole(serverRole(message.author.id, message.server.id)):
+        if roleAuth.checkRole(client, message):
             await client.send_typing(message.channel)
             try:
                 msg = message.content

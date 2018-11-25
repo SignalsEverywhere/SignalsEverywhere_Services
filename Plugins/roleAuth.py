@@ -22,7 +22,9 @@ def adminRole(author):
     else:
         pass
 
-def checkRole(author):
+
+def checkRole(client, message):
+    author = client.get_server(message.server.id).get_member(message.author.id).roles
     config.read(currentPath() + '/settings.txt')
     role1 = config.get('Authorized_Roles', 'role1')
     role2 = config.get('Authorized_Roles', 'role2')
